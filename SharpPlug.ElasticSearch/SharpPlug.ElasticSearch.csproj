@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>LiangShiWei</Authors>
+    <Company>LiangShiWei</Company>
+    <Description>.Net Core Sharp ElasticSearch Plug</Description>
+    <RepositoryUrl>https://github.com/ShiWei-L/SharpPlugs</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
