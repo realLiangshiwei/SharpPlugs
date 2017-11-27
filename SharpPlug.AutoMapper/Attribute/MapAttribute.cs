@@ -4,11 +4,12 @@ using AutoMapper;
 namespace SharpPlug.AutoMapper.Attribute
 {
     /// <summary>
-    /// 映射到类
+    /// 双向映射
     /// </summary>
-    public class MapToAttribute : MapAttributeBase
+    public class MapAttribute : MapAttributeBase
     {
-        public MapToAttribute(params Type[] targeTypes) : base(targeTypes)
+        public MapAttribute(params Type[] targetTypes)
+            : base(targetTypes)
         {
 
         }
@@ -20,7 +21,8 @@ namespace SharpPlug.AutoMapper.Attribute
 
             foreach (var targetType in TargetTypes)
             {
-                configuration.CreateMap(targetType, type, MemberList.Source);
+                configuration.CreateMap(type, targetType, MemberList.Source);
+                configuration.CreateMap(targetType, type, MemberList.Destination);
             }
         }
     }

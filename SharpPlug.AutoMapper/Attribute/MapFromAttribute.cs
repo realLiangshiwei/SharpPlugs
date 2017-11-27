@@ -1,17 +1,28 @@
 ﻿using System;
+using AutoMapper;
 
 namespace SharpPlug.AutoMapper.Attribute
 {
     /// <summary>
     /// 从类中映射
     /// </summary>
-    public class MapFromAttribute : System.Attribute
+    public class MapFromAttribute : MapAttributeBase
     {
-        public Type[] TargetTypes;
 
-        public MapFromAttribute(params Type[] targeTypes)
+        public MapFromAttribute(params Type[] targeTypes) : base(targeTypes)
         {
-            TargetTypes = targeTypes;
+            
+        }
+
+        public override void CreateMap(IMapperConfigurationExpression configuration, Type type)
+        {
+            if (TargetTypes == null || TargetTypes.Length <= 0)
+                return;
+
+            foreach (var targetType in TargetTypes)
+            {
+                configuration.CreateMap(targetType, type, MemberList.Destination);
+            }
         }
     }
 }
