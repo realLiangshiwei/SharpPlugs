@@ -8,6 +8,7 @@
     <Description>.Net Core Sharp AutoMapper Plug</Description>
     <RepositoryUrl>https://github.com/ShiWei-L/SharpPlugs</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
+    <PackageLicenseUrl>https://github.com/ShiWei-L/SharpPlugs/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>

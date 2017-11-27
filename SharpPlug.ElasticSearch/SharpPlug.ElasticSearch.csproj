@@ -7,6 +7,7 @@
     <Company>LiangShiWei</Company>
     <Description>.Net Core Sharp ElasticSearch Plug</Description>
     <RepositoryUrl>https://github.com/ShiWei-L/SharpPlugs</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/ShiWei-L/SharpPlugs/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
