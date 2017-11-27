@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using AspectCore.Extensions.Reflection;
 using AutoMapper;
 using SharpPlug.AutoMapper.Attribute;
 using SharpPlug.Core;
@@ -17,20 +18,22 @@ namespace SharpPlug.AutoMapper
             {
                 foreach (var assembly in assemblies)
                 {
+        
                     var types = from type in assembly.GetTypes()
-                                let typeInfo = type.GetTypeInfo()
-                                where type.IsDefined(typeof(MapAttribute)) || type.IsDefined(typeof(MapToAttribute)) ||
-                                      type.IsDefined(typeof(MapFromAttribute))
+                                let refType = type.GetReflector()
+                                where refType.IsDefined(typeof(AutoMapAttribute)) || refType.IsDefined(typeof(MapToAttribute)) ||
+                                      refType.IsDefined(typeof(MapFromAttribute)) 
                                 select type;
+                    
                     foreach (var type in types)
                     {
-                        foreach (var autoMapAttribute in type.GetTypeInfo().GetCustomAttributes<MapAttributeBase>())
+                        foreach (var autoMapAttribute in type.GetReflector().GetCustomAttributes<MapAttributeBase>())
                         {
                             autoMapAttribute.CreateMap(config, type);
                         }
                     }
-
-                    var mappingTypes = assembly.GetTypes().Where(o => o.GetInterfaces().Contains(typeof(IMapping))).ToArray();
+                   
+                   var mappingTypes = assembly.GetTypes().Where(o => o.GetInterfaces().Contains(typeof(IMapping))).ToArray();
                     foreach (var mapingType in mappingTypes)
                     {
                         ((IMapping)Activator.CreateInstance(mapingType, true)).CreateMapping(config);

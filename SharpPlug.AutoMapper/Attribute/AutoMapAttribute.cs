@@ -6,9 +6,9 @@ namespace SharpPlug.AutoMapper.Attribute
     /// <summary>
     /// 双向映射
     /// </summary>
-    public class MapAttribute : MapAttributeBase
+    public class AutoMapAttribute : MapAttributeBase
     {
-        public MapAttribute(params Type[] targetTypes)
+        public AutoMapAttribute(params Type[] targetTypes)
             : base(targetTypes)
         {
 
