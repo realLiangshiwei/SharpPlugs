@@ -8,16 +8,17 @@ namespace SharpPlug.Core.DI
     /// <summary>
     /// 依賴注入管理
     /// </summary>
-    public static class DiManager
+    public static class DiSharpBuilderExtensions
     {
         /// <summary>
         /// 传入程序集,注册依賴关系
         /// </summary>
-        /// <param name="serivce"></param>
+        /// <param name="builder"></param>
         /// <param name="assembly"></param>
-        public static void Register(this IServiceCollection serivce, params Assembly[] assembly)
+        public static ISharpPlugBuilder Register(this ISharpPlugBuilder builder, params Assembly[] assembly)
         {
-            assembly.AsParallel().ForAll(ass => DefaultRegister(serivce, ass));
+            assembly.AsParallel().ForAll(ass => DefaultRegister(builder.Services, ass));
+            return builder;
         }
 
         private static void DefaultRegister(IServiceCollection sercice, Assembly assembly)
@@ -46,7 +47,6 @@ namespace SharpPlug.Core.DI
                     CheckType(type);
                     sercice.AddSingleton(type, intrefaces.First());
                 }
-
             }
         }
     }
