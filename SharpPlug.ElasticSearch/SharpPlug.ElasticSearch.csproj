@@ -8,6 +8,9 @@
     <Description>.Net Core Sharp ElasticSearch Plug</Description>
     <RepositoryUrl>https://github.com/ShiWei-L/SharpPlugs</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/ShiWei-L/SharpPlugs/blob/master/LICENSE</PackageLicenseUrl>
+    <Version>1.0.1</Version>
+    <PackageProjectUrl>https://github.com/ShiWei-L/SharpPlugs</PackageProjectUrl>
+    <PackageReleaseNotes>.Net Core Sharp ElasticSearch Plug</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
