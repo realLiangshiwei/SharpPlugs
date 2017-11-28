@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.AutoMapper", "SharpPlug.AutoMapper\SharpPlug.AutoMapper.csproj", "{5D8274C3-35AC-4F8D-B61E-484D1A35734E}"
 EndProject
@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.Core", "SharpPlug
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.ElasticSearch", "SharpPlug.ElasticSearch\SharpPlug.ElasticSearch.csproj", "{2DB8683E-B938-49A1-8910-C303EA5813B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpPlug.Test", "SharpPlug.Test\SharpPlug.Test.csproj", "{0A2DB61D-0868-4432-9D32-DD908B8D7625}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.Test", "SharpPlug.Test\SharpPlug.Test.csproj", "{0A2DB61D-0868-4432-9D32-DD908B8D7625}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpPlug.WebApi", "SharpPlug.WebApi\SharpPlug.WebApi.csproj", "{8AC13458-A465-49FC-AB5C-C4166F40546D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0A2DB61D-0868-4432-9D32-DD908B8D7625}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A2DB61D-0868-4432-9D32-DD908B8D7625}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A2DB61D-0868-4432-9D32-DD908B8D7625}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AC13458-A465-49FC-AB5C-C4166F40546D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AC13458-A465-49FC-AB5C-C4166F40546D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AC13458-A465-49FC-AB5C-C4166F40546D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AC13458-A465-49FC-AB5C-C4166F40546D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
