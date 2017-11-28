@@ -1,5 +1,6 @@
 
 <img src="https://raw.githubusercontent.com/ShiWei-L/SharpPlugs/master/SharpPlug.Core/logo.png" width="200" height="200" /> 
+
 # SharpPlugs
 .Net Core 鋒利扩展 
 
@@ -7,8 +8,8 @@
 [![NuGet](https://img.shields.io/nuget/v/SharpPlug.Core.svg)](https://www.nuget.org/packages/SharpPlug.Core/)
 [![NuGet](https://img.shields.io/nuget/dt/SharpPlug.Core.svg)](https://www.nuget.org/packages/SharpPlug.Core/)
 
-## 目前的功能有
-DI
-AutoMapper
-ElasticSearch
+### Current Features
 
+- DI
+- AutoMapper
+- ElasticSearch
