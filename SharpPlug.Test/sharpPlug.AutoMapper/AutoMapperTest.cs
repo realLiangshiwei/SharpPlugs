@@ -11,36 +11,35 @@ namespace SharpPlug.Test.sharpPlug.AutoMapper
 
     public class AutoMapperTest
     {
-        public void Builder()
+        [Fact]
+        public void AutoMapper_Init_Success()
         {
             ISharpPlugBuilder builder = new DefaultSharpPlugBuilder(null);
 
             builder.AddAutoMapperPlug(Assembly.GetExecutingAssembly());
         }
 
-        [Fact]
-        public void AutoMapper_Init_Success()
-        {
-            Builder();
-        }
+    
 
+        [Fact]
         public void Map_Success()
         {
+            AutoMapper_Init_Success();
             var per = new Person()
             {
                 Name = "小明"
             };
             var dto = per.MapTo<PersonDto>();
-            Assert.Equal<string>(dto.Name, per.Name);
+            Assert.Equal(dto.Name, per.Name);
 
             var mapfrom = new MapFrom { Str = "test" };
-            Assert.Equal<string>(mapfrom.MapTo<MapFromDto>().Str, mapfrom.Str);
+            Assert.Equal(mapfrom.MapTo<MapFromDto>().Str, mapfrom.Str);
 
             var custom = new Custom()
             {
                 Str = "test"
             };
-            Assert.Equal<string>(custom.MapTo<CustomDto>().Str1, mapfrom.Str);
+            Assert.Equal(custom.MapTo<CustomDto>().Str1, mapfrom.Str);
         }
     }
 
