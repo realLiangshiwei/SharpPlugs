@@ -11,8 +11,7 @@ namespace SharpPlug.Test.sharpPlug.AutoMapper
 
     public class AutoMapperTest
     {
-        [Fact]
-        public void AutoMapper_Init_Success()
+        internal void Builder()
         {
             ISharpPlugBuilder builder = new DefaultSharpPlugBuilder(null);
 
@@ -24,7 +23,7 @@ namespace SharpPlug.Test.sharpPlug.AutoMapper
         [Fact]
         public void Map_Success()
         {
-            AutoMapper_Init_Success();
+            Builder();
             var per = new Person()
             {
                 Name = "小明"
