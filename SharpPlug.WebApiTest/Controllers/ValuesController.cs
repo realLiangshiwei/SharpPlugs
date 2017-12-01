@@ -16,7 +16,7 @@ namespace SharpPlug.WebApiTest.Controllers
         /// Get
         /// </summary>
         /// <returns></returns>
-       
+        [HttpGet("GetTest")]
         public IEnumerable<string> GetVal()
         {
             return new string[] { "value1", "value2" };
@@ -26,6 +26,7 @@ namespace SharpPlug.WebApiTest.Controllers
         /// xx
         /// </summary>
         /// <returns></returns>
+
         public string PostTest(int? id)
         {
             return "hello world";

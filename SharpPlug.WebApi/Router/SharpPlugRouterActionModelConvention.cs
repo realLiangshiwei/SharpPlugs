@@ -19,13 +19,11 @@ namespace SharpPlug.WebApi.Router
 
         public void Apply(ActionModel action)
         {
-            action.Selectors.Clear();
-
             var method = action.ActionMethod;
 
             if (method.IsDefined(typeof(HttpMethodAttribute)))
                 return;
-
+            action.Selectors.Clear();
             //custom prefix
             HttpMethodAttribute attr;
             foreach (var custom in _options.CustomRule)
