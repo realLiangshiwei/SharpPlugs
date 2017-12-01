@@ -16,13 +16,13 @@ namespace SharpPlug.WebApi.Router
         /// <param name="builder"></param>
         /// <param name="startAction">custom option</param>
         /// <returns></returns>
-        public static ISharpPlugBuilder AddWebApiRouter(this ISharpPlugBuilder builder, Action<SharpPlugRouterOptions> startAction = null)
+        public static ISharpPlugBuilder AddWebApiRouter(this ISharpPlugBuilder builder, Action<SharpPlugRouterOptions> setupAction = null)
         {
             var options = new SharpPlugRouterOptions()
             {
                 CustomRule = new Dictionary<string, HttpVerbs>()
             };
-            startAction?.Invoke(options);
+            setupAction?.Invoke(options);
             builder.Services.Configure<SharpPlugRouterOptions>(opt =>
             {
                 opt.CustomRule = options.CustomRule;

@@ -25,27 +25,45 @@ namespace SharpPlug.Core.DI
         {
             void CheckType(Type t)
             {
-                if (!t.IsInterface)
-                    throw new Exception("DI接口请用类实现,不可以使用接口");
+                if (t.IsInterface)
+                    throw new Exception("Please use class implements interface, can not use interface");
             }
 
+            bool CheckInterface(Type t, string dependency)
+            {
+                if (t.GetInterfaces().Any(o => o.Name != dependency))
+                {
+                    return true;
+                }
+                return false;
+            }
             foreach (var type in assembly.GetTypes())
             {
-                var intrefaces = type.GetInterfaces();
-                if (intrefaces.Contains(typeof(ITrasientDependency)))
+
+                if (typeof(ITrasientDependency).IsAssignableFrom(type))
                 {
                     CheckType(type);
-                    sercice.AddTransient(type, intrefaces.First());
+                    if (CheckInterface(type, nameof(ITrasientDependency)))
+                        sercice.AddTransient(type.GetInterfaces().First(), type);
+                    else
+                        sercice.AddTransient(type);
+
                 }
-                if (intrefaces.Contains(typeof(IScopedDependency)))
+                else if (typeof(IScopedDependency).IsAssignableFrom(type))
                 {
                     CheckType(type);
-                    sercice.AddScoped(type, intrefaces.First());
+                    if (CheckInterface(type, nameof(IScopedDependency)))
+                        sercice.AddScoped(type.GetInterfaces().First(), type);
+                    else
+                        sercice.AddScoped(type);
                 }
-                if (intrefaces.Contains(typeof(ISingletonDependency)))
+                else if (typeof(ISingletonDependency).IsAssignableFrom(type))
                 {
                     CheckType(type);
-                    sercice.AddSingleton(type, intrefaces.First());
+                    if (CheckInterface(type, nameof(ISingletonDependency)))
+                        sercice.AddSingleton(type.GetInterfaces().First(), type);
+                    else
+                        sercice.AddSingleton(type);
                 }
             }
         }

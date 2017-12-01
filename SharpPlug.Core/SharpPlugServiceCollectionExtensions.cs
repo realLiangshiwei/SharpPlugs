@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using SharpPlug.Core.DI;
 
 namespace SharpPlug.Core
@@ -8,11 +10,12 @@ namespace SharpPlug.Core
     /// </summary>
     public static class SharpPlugServiceCollectionExtensions
     {
-        public static ISharpPlugBuilder AddSharpPlugCore(this IServiceCollection services)
+        public static ISharpPlugBuilder AddSharpPlugCore(this IServiceCollection services, Action<SharpPlogCoreOptions> setupAction = null)
         {
             var builder = new DefaultSharpPlugBuilder(services);
-            builder.Register();
-
+            var options = new SharpPlogCoreOptions();
+            setupAction?.Invoke(options);
+            builder.Register(options.DiAssembly.ToArray());
             return builder;
         }
     }

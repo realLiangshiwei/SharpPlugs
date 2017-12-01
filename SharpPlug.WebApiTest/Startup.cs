@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,21 +35,24 @@ namespace SharpPlug.WebApiTest
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSharpPlugCore()
-                .AddWebApiRouter(custom =>
-            {
-                custom.CustomRule.Add("Get1", HttpVerbs.HttpGet);
-            }).AddSharpPlugSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
+            services.AddSharpPlugCore(opt =>
                 {
-                    Version = "v1",
-                    Title = "WebApi Test",
-                    Description = "WebApi Test",
+                    opt.DiAssembly.Add(Assembly.GetExecutingAssembly());
+                })
+                .AddWebApiRouter(custom =>
+                {
+                    custom.CustomRule.Add("Get1", HttpVerbs.HttpGet);
+                }).AddSharpPlugSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new Info
+                    {
+                        Version = "v1",
+                        Title = "WebApi Test",
+                        Description = "WebApi Test",
+                    });
+                    c.DocInclusionPredicate((docname, des) => true);
+
                 });
-                c.DocInclusionPredicate((docname, des) => true);
-             
-            });
             services.AddMvc();
 
         }

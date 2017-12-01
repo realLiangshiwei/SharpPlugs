@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using SharpPlug.WebApi.Configuration;
 
 namespace SharpPlug.WebApiTest.Controllers
 {
@@ -12,6 +10,16 @@ namespace SharpPlug.WebApiTest.Controllers
     public class ValuesController : Controller
     {
 
+        private readonly ITestDi _testDi;
+
+        private readonly TestDi2 _testDi2;
+
+        public ValuesController(ITestDi testDi, TestDi2 testDi2)
+        {
+            _testDi = testDi;
+            _testDi2 = testDi2;
+        }
+
         /// <summary>
         /// Get
         /// </summary>
@@ -19,7 +27,7 @@ namespace SharpPlug.WebApiTest.Controllers
         [HttpGet("GetTest")]
         public IEnumerable<string> GetVal()
         {
-            return new string[] { "value1", "value2" };
+            return _testDi2.Test();
         }
 
         /// <summary>
@@ -29,7 +37,7 @@ namespace SharpPlug.WebApiTest.Controllers
 
         public string PostTest(int? id)
         {
-            return "hello world";
+            return _testDi.Test();
         }
     }
 }
