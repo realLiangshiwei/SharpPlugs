@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using SharpPlug.Core;
@@ -14,7 +13,7 @@ namespace SharpPlug.WebApi.Router
         /// Auto Add RouterAttribute And  HttpMethodAttribute
         /// </summary>
         /// <param name="builder"></param>
-        /// <param name="startAction">custom option</param>
+        /// <param name="setupAction"></param>
         /// <returns></returns>
         public static ISharpPlugBuilder AddWebApiRouter(this ISharpPlugBuilder builder, Action<SharpPlugRouterOptions> setupAction = null)
         {

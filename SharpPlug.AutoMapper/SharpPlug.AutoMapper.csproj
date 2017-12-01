@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/ShiWei-L/SharpPlugs</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/ShiWei-L/SharpPlugs/master/SharpPlug.Core/logo.png</PackageIconUrl>
     <Product>SharpPlug</Product>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

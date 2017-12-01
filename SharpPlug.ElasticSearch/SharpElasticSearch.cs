@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Microsoft.Extensions.Options;
 using Nest;
+using SharpPlug.ElasticSearch.Configuration;
 
 namespace SharpPlug.ElasticSearch
 {
@@ -14,8 +16,11 @@ namespace SharpPlug.ElasticSearch
     {
         public IElasticClient EsClient { get; set; }
 
-        public SharpElasticSearch()
+        private readonly IOptions<ElasticSearchOptions> _options;
+
+        public SharpElasticSearch(IOptions<ElasticSearchOptions> options)
         {
+            _options = options;
             EsClient = GetClient();
         }
 
@@ -25,12 +30,12 @@ namespace SharpPlug.ElasticSearch
         /// <returns></returns>
         private ElasticClient GetClient()
         {
-            var str = EsServiceCollectionExtensions.DefaultElasticSearchOptions.ConnectionString;
+            var str = _options.Value.ConnectionString;
             var strs = str.Split('|');
             var nodes = strs.Select(s => new Uri(s)).ToList();
             var connectionPool = new SniffingConnectionPool(nodes);
             var connectionString = new ConnectionSettings(connectionPool);
-            connectionString.BasicAuthentication(EsServiceCollectionExtensions.DefaultElasticSearchOptions.AuthUserName, EsServiceCollectionExtensions.DefaultElasticSearchOptions.AuthPassWord);
+            connectionString.BasicAuthentication(_options.Value.AuthUserName, _options.Value.AuthPassWord);
 
             return new ElasticClient(connectionString);
         }

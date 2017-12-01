@@ -12,6 +12,7 @@
     <Authors>LiangShiWei</Authors>
     <Company>LiangShiWei</Company>
     <Product>SharpPlug</Product>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

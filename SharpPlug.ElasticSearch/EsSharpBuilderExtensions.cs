@@ -10,10 +10,9 @@ namespace SharpPlug.ElasticSearch
     /// </summary>
     public static class EsServiceCollectionExtensions
     {
-        public static readonly ElasticSearchOptions DefaultElasticSearchOptions = new ElasticSearchOptions();
         public static ISharpPlugBuilder AddElasticSearchPlug(this ISharpPlugBuilder builder, Action<ElasticSearchOptions> setupAction)
         {
-            setupAction(DefaultElasticSearchOptions);
+            builder.Services.Configure(setupAction);
             builder.Services.AddTransient<ISharpElasticsearch, SharpElasticSearch>();
             return builder;
         }
