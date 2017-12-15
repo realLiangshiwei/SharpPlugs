@@ -15,7 +15,7 @@ namespace SharpPlug.Core
             var builder = new DefaultSharpPlugBuilder(services);
             var options = new SharpPlogCoreOptions();
             setupAction?.Invoke(options);
-            builder.Register(options.DiAssembly.ToArray());
+            builder.Register(options.ClassSuffix.ToArray(), options.DiAssembly.ToArray());
             return builder;
         }
     }

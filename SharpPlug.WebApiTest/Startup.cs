@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SharpPlug.Core;
+using SharpPlug.EntityFrameworkCore;
 using SharpPlug.WebApi.Configuration;
 using SharpPlug.WebApi.Router;
 using Swashbuckle.AspNetCore.Swagger;
@@ -35,6 +36,7 @@ namespace SharpPlug.WebApiTest
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+      
             services.AddSharpPlugCore(opt =>
                 {
                     opt.DiAssembly.Add(Assembly.GetExecutingAssembly());
@@ -52,7 +54,7 @@ namespace SharpPlug.WebApiTest
                     });
                     c.DocInclusionPredicate((docname, des) => true);
 
-                });
+                }).AddEntityFramework();
             services.AddMvc();
 
         }

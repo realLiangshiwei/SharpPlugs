@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.AutoMapper", "SharpPlug.AutoMapper\SharpPlug.AutoMapper.csproj", "{5D8274C3-35AC-4F8D-B61E-484D1A35734E}"
 EndProject
@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.WebApi", "SharpPl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{42D8EA84-60FB-4373-8CDE-598A0976813D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpPlug.WebApiTest", "SharpPlug.WebApiTest\SharpPlug.WebApiTest.csproj", "{CC213572-B182-4575-A492-10E969E40DB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.WebApiTest", "SharpPlug.WebApiTest\SharpPlug.WebApiTest.csproj", "{CC213572-B182-4575-A492-10E969E40DB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{45105641-86F7-4229-B394-044DF0923BBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpPlug.EntityFrameworkCore", "SharpPlug.EntityFrameworkCore\SharpPlug.EntityFrameworkCore.csproj", "{F992491D-BE17-4F9A-B8CB-16C7361AA52C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,13 +51,22 @@ Global
 		{CC213572-B182-4575-A492-10E969E40DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC213572-B182-4575-A492-10E969E40DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC213572-B182-4575-A492-10E969E40DB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F992491D-BE17-4F9A-B8CB-16C7361AA52C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F992491D-BE17-4F9A-B8CB-16C7361AA52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F992491D-BE17-4F9A-B8CB-16C7361AA52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F992491D-BE17-4F9A-B8CB-16C7361AA52C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{5D8274C3-35AC-4F8D-B61E-484D1A35734E} = {45105641-86F7-4229-B394-044DF0923BBA}
+		{7936541D-0704-4E03-88D6-996E9D61F803} = {45105641-86F7-4229-B394-044DF0923BBA}
+		{2DB8683E-B938-49A1-8910-C303EA5813B8} = {45105641-86F7-4229-B394-044DF0923BBA}
 		{0A2DB61D-0868-4432-9D32-DD908B8D7625} = {42D8EA84-60FB-4373-8CDE-598A0976813D}
+		{8AC13458-A465-49FC-AB5C-C4166F40546D} = {45105641-86F7-4229-B394-044DF0923BBA}
 		{CC213572-B182-4575-A492-10E969E40DB7} = {42D8EA84-60FB-4373-8CDE-598A0976813D}
+		{F992491D-BE17-4F9A-B8CB-16C7361AA52C} = {45105641-86F7-4229-B394-044DF0923BBA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {382A3462-A165-4BA5-97B1-829D4E162676}

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,57 +13,64 @@ namespace SharpPlug.Core.DI
         /// 传入程序集,注册依賴关系
         /// </summary>
         /// <param name="builder"></param>
+        /// <param name="classSuffix"></param>
         /// <param name="assembly"></param>
-        public static ISharpPlugBuilder Register(this ISharpPlugBuilder builder, params Assembly[] assembly)
+        public static ISharpPlugBuilder Register(this ISharpPlugBuilder builder, string[] classSuffix, params Assembly[] assembly)
         {
-            assembly.AsParallel().ForAll(ass => DefaultRegister(builder.Services, ass));
+            assembly.AsParallel().ForAll(ass => DefaultRegister(builder.Services, classSuffix, ass));
             return builder;
         }
 
-        private static void DefaultRegister(IServiceCollection sercice, Assembly assembly)
+        private static void DefaultRegister(IServiceCollection sercice, string[] classSuffix, Assembly assembly)
         {
-            void CheckType(Type t)
-            {
-                if (t.IsInterface)
-                    throw new Exception("Please use class implements interface, can not use interface");
-            }
 
-            bool CheckInterface(Type t, string dependency)
-            {
-                if (t.GetInterfaces().Any(o => o.Name != dependency))
-                {
-                    return true;
-                }
-                return false;
-            }
-            foreach (var type in assembly.GetTypes())
-            {
+            var allType = assembly.GetTypes();
+            var types = allType.Where(o =>
+            (typeof(ITrasientDependency).IsAssignableFrom(o) || typeof(IScopedDependency).IsAssignableFrom(o) || typeof(ISingletonDependency).IsAssignableFrom(o))
+            && classSuffix.Any(x => o.Name.EndsWith(x)
+            && !o.IsInterface)
+            ).ToList();
 
+            foreach (var type in allType.Where(o =>
+            (typeof(ITrasientDependency).IsAssignableFrom(o) || typeof(IScopedDependency).IsAssignableFrom(o) || typeof(ISingletonDependency).IsAssignableFrom(o))
+            && classSuffix.All(x => !o.Name.EndsWith(x)
+            && !o.IsInterface)).ToList())
+            {
                 if (typeof(ITrasientDependency).IsAssignableFrom(type))
                 {
-                    CheckType(type);
-                    if (CheckInterface(type, nameof(ITrasientDependency)))
-                        sercice.AddTransient(type.GetInterfaces().First(), type);
-                    else
-                        sercice.AddTransient(type);
-
+                    sercice.AddTransient(type);
                 }
                 else if (typeof(IScopedDependency).IsAssignableFrom(type))
                 {
-                    CheckType(type);
-                    if (CheckInterface(type, nameof(IScopedDependency)))
-                        sercice.AddScoped(type.GetInterfaces().First(), type);
-                    else
-                        sercice.AddScoped(type);
+
+                    sercice.AddScoped(type);
                 }
                 else if (typeof(ISingletonDependency).IsAssignableFrom(type))
                 {
-                    CheckType(type);
-                    if (CheckInterface(type, nameof(ISingletonDependency)))
-                        sercice.AddSingleton(type.GetInterfaces().First(), type);
-                    else
-                        sercice.AddSingleton(type);
+                    sercice.AddSingleton(type);
                 }
+            }
+
+            foreach (var type in types)
+            {
+                var @interface = allType.FirstOrDefault(o => o.Name == "I" + type.Name && o.IsInterface);
+                if (@interface != null)
+                {
+                    if (typeof(ITrasientDependency).IsAssignableFrom(type))
+                    {
+                        sercice.AddTransient(@interface, type);
+                    }
+                    else if (typeof(IScopedDependency).IsAssignableFrom(type))
+                    {
+
+                        sercice.AddScoped(@interface, type);
+                    }
+                    else if (typeof(ISingletonDependency).IsAssignableFrom(type))
+                    {
+                        sercice.AddSingleton(@interface, type);
+                    }
+                }
+
             }
         }
     }

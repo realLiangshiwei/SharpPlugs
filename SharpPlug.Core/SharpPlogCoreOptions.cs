@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace SharpPlug.Core
 {
@@ -11,10 +9,16 @@ namespace SharpPlug.Core
         public SharpPlogCoreOptions()
         {
             DiAssembly = new List<Assembly>();
+            ClassSuffix = new List<string>
+            {
+                "Service",
+                "Repository"
+            };
         }
 
         public IList<Assembly> DiAssembly { get; }
 
+        public IList<string> ClassSuffix { get; }
 
     }
 }
