@@ -39,7 +39,7 @@ namespace SharpPlug.EntityFrameworkCore.RepositoriesBase
             if (propertySelectors == null || propertySelectors.Length <= 0) return query;
             foreach (var propertySelector in propertySelectors)
             {
-                query = EntityFrameworkQueryableExtensions.Include(query, propertySelector);
+                query = query.Include(propertySelector);
             }
             return query;
         }
@@ -51,83 +51,83 @@ namespace SharpPlug.EntityFrameworkCore.RepositoriesBase
 
         public async Task<List<TEntity>> GetAllListAsync()
         {
-            return await EntityFrameworkQueryableExtensions.ToListAsync(GetAll());
+            return await GetAll().ToListAsync();
         }
 
         public List<TEntity> GetAllList()
         {
-            return Enumerable.ToList(GetAll());
+            return GetAll().ToList();
         }
 
         public int Count()
         {
-            return Queryable.Count(GetAll());
+            return GetAll().Count();
         }
 
         public int Count(Expression<Func<TEntity, bool>> predicate)
         {
-            return Queryable.Count(GetAll(), predicate);
+            return GetAll().Count(predicate);
         }
 
         public long LongCount()
         {
-            return Queryable.LongCount(GetAll());
+            return GetAll().LongCount();
         }
 
         public long LongCount(Expression<Func<TEntity, bool>> predicate)
         {
-            return Queryable.LongCount(GetAll(), predicate);
+            return GetAll().LongCount(predicate);
         }
 
         public async Task<int> CountAsync()
         {
-            return await EntityFrameworkQueryableExtensions.CountAsync(GetAll());
+            return await GetAll().CountAsync();
         }
 
         public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await EntityFrameworkQueryableExtensions.CountAsync(GetAll(), predicate);
+            return await GetAll().CountAsync(predicate);
         }
 
         public async Task<long> LongCountAsync()
         {
-            return await EntityFrameworkQueryableExtensions.LongCountAsync(GetAll());
+            return await GetAll().LongCountAsync();
         }
 
         public async Task<long> LongCountAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await EntityFrameworkQueryableExtensions.LongCountAsync(GetAll(), predicate);
+            return await GetAll().LongCountAsync(predicate);
         }
 
         public async Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await EntityFrameworkQueryableExtensions.SingleAsync(GetAll(), predicate);
+            return await GetAll().SingleAsync(predicate);
         }
 
         public async Task<TEntity> FirstOrDefaultAsync(TKey id)
         {
-            return await EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(GetAll(), o => o.Id.Equals(id));
+            return await GetAll().FirstOrDefaultAsync(o => o.Id.Equals(id));
         }
 
         public async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(GetAll(), predicate);
+            return await GetAll().FirstOrDefaultAsync(predicate);
         }
 
         public TEntity FirstOrDefault(TKey id)
         {
-            return Queryable.FirstOrDefault(GetAll(), o => o.Id.Equals(id));
+            return GetAll().FirstOrDefault(o => o.Id.Equals(id));
         }
 
         public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
-            return Queryable.FirstOrDefault(GetAll(), predicate);
+            return GetAll().FirstOrDefault(predicate);
         }
 
 
         public TEntity AddOrUpdate(TEntity entity)
         {
-            if (EntityExtensions.HasId(entity))
+            if (entity.HasId())
             {
                 Attach(entity);
                 Table.Update(entity);
@@ -147,7 +147,7 @@ namespace SharpPlug.EntityFrameworkCore.RepositoriesBase
 
         public async Task<TKey> AddOrUpdateAndGetIdAsync(TEntity entity)
         {
-            if (EntityExtensions.HasId(entity))
+            if (entity.HasId())
                 Table.Update(entity);
             else
                 Table.Add(entity);
@@ -157,7 +157,7 @@ namespace SharpPlug.EntityFrameworkCore.RepositoriesBase
 
         public TKey AddOrUpdateAndGetId(TEntity entity)
         {
-            if (EntityExtensions.HasId(entity))
+            if (entity.HasId())
                 Table.Update(entity);
             else
                 Table.Add(entity);
@@ -168,7 +168,7 @@ namespace SharpPlug.EntityFrameworkCore.RepositoriesBase
 
         protected virtual void Attach(TEntity entity)
         {
-            var entry = Enumerable.FirstOrDefault<EntityEntry>(_dbcontext.ChangeTracker.Entries(), ent => ent.Entity == entity);
+            var entry = _dbcontext.ChangeTracker.Entries().FirstOrDefault(ent => ent.Entity == entity);
             if (entry != null)
                 return;
             Table.Attach(entity);

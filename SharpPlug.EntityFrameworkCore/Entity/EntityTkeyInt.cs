@@ -6,4 +6,6 @@ namespace SharpPlug.EntityFrameworkCore.Entity
     {
         public int Id { get; set; }
     }
+
+   
 }
