@@ -45,8 +45,10 @@ namespace SharpPlug.ElasticSearch
         /// Auto Set Alias alias is Input IndexName
         /// </summary>
         /// <param name="indexName"></param>
+        /// <param name="shard"></param>
+        /// <param name="eplica"></param>
         /// <returns></returns>
-        public virtual async Task CrateIndexAsync(string indexName)
+        public virtual async Task CrateIndexAsync(string indexName, int shard = 1, int eplica = 1)
         {
             var exis = await EsClient.IndexExistsAsync(indexName);
             if (exis.Exists)
@@ -57,7 +59,7 @@ namespace SharpPlug.ElasticSearch
                     ss =>
                         ss.Index(newName)
                             .Settings(
-                                o => o.NumberOfShards(1).NumberOfReplicas(1).Setting("max_result_window", int.MaxValue)));
+                                o => o.NumberOfShards(shard).NumberOfReplicas(eplica).Setting("max_result_window", int.MaxValue)));
             if (result.Acknowledged)
             {
                 await EsClient.AliasAsync(al => al.Add(add => add.Index(newName).Alias(indexName)));

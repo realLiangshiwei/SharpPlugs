@@ -22,8 +22,10 @@ namespace SharpPlug.ElasticSearch
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="indexName"></param>
+        /// <param name="shard"></param>
+        /// <param name="eplica"></param>
         /// <returns></returns>
-        Task CreateIndexAsync<T>(string indexName) where T : class;
+        Task CreateIndexAsync<T>(string indexName, int shard = 1, int eplica = 1) where T : class;
 
         /// <summary>
         /// ReIndex

@@ -22,7 +22,7 @@ namespace SharpPlug.WebApi.Swashbuckle
             builder.Services.Configure(setupAction ?? (opts => { }));
 
             builder.Services.AddTransient(CreateSwaggerProvider);
-
+           
             return builder;
         }
 
