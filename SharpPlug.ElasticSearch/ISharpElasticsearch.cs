@@ -13,8 +13,10 @@ namespace SharpPlug.ElasticSearch
         /// Auto Set Alias alias is Input IndexName
         /// </summary>
         /// <param name="indexName"></param>
+        /// <param name="shard"></param>
+        /// <param name="eplica"></param>
         /// <returns></returns>
-        Task CrateIndexAsync(string indexName);
+        Task CrateIndexAsync(string indexName,int shard = 1, int eplica = 1);
 
         /// <summary>
         /// CreateEsIndex auto Mapping T Property

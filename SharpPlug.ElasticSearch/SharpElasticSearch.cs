@@ -74,8 +74,10 @@ namespace SharpPlug.ElasticSearch
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="indexName"></param>
+        /// <param name="shard"></param>
+        /// <param name="eplica"></param>
         /// <returns></returns>
-        public virtual async Task CreateIndexAsync<T>(string indexName) where T : class
+        public virtual async Task CreateIndexAsync<T>(string indexName, int shard = 1, int eplica = 1) where T : class
         {
             var exis = await EsClient.IndexExistsAsync(indexName);
 
@@ -87,7 +89,7 @@ namespace SharpPlug.ElasticSearch
                     ss =>
                         ss.Index(newName)
                             .Settings(
-                                o => o.NumberOfShards(1).NumberOfReplicas(1).Setting("max_result_window", int.MaxValue))
+                                o => o.NumberOfShards(shard).NumberOfReplicas(eplica).Setting("max_result_window", int.MaxValue))
                             .Mappings(m => m.Map<T>(mm => mm.AutoMap())));
             if (result.Acknowledged)
             {
