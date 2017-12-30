@@ -3,7 +3,8 @@
 
 # SharpPlugs 
 
-.Net Core 鋒利扩展
+.Net Core 鋒利扩展   
+[中文文档](/doc/readme_cn.md)
 
 
 [![Build status](https://ci.appveyor.com/api/projects/status/74whrxjajlnacjma?svg=true)](https://ci.appveyor.com/project/ShiWei-L/sharpplugs)
