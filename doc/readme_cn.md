@@ -83,4 +83,4 @@ public class HomeController : Controller
 
 ![asp.net core Project](/doc/img/getStarted/4.png)
 
-想要了解更多的使用方法? 请查看高级文档部分
+想要了解更多的使用方法? 请查看[高级文档](/doc/ddocument_cn.md)部分

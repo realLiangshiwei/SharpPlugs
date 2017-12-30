@@ -86,4 +86,4 @@ Now we press F5 to let it continue to run , We will see the Hello World output
 
 ![asp.net core Project](/doc/img/getStarted/4.png)
 
-Want to know more usage?Please see the advanced document
+Want to know more usage?Please see the [advanced document](/doc/ddocument.md) 
