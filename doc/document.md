@@ -1,5 +1,6 @@
 # SharpPlugs
 [中文版本](/doc/ddocument_cn.md)
+
 SharpPlugs Asp.Net is the Core of lightweight extension, is designed to provide with Asp.Net in the process of the development of the Core needs a variety of functions, such as automatic dependency injection, AutoMapper automatic mapping, WebApi naming convention routing, etc
 
 SharpPlugs can make developers need not concern tedious details to focus on the development of the business logic, SharpPlug will add more functionality to meet the needs of the developer
