@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.WebApiTest", "Sha
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{45105641-86F7-4229-B394-044DF0923BBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpPlug.EntityFrameworkCore", "SharpPlug.EntityFrameworkCore\SharpPlug.EntityFrameworkCore.csproj", "{F992491D-BE17-4F9A-B8CB-16C7361AA52C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.EntityFrameworkCore", "SharpPlug.EntityFrameworkCore\SharpPlug.EntityFrameworkCore.csproj", "{F992491D-BE17-4F9A-B8CB-16C7361AA52C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "site", "site", "{B4C06752-E452-4E96-A3BF-BB0CE59B77DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
