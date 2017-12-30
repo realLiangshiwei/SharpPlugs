@@ -3,15 +3,14 @@
 
 # SharpPlugs 
 
-.Net Core 鋒利扩展   
-[中文文档](/doc/readme_cn.md)
+.Net Core 鋒利扩展
 
 
 [![Build status](https://ci.appveyor.com/api/projects/status/74whrxjajlnacjma?svg=true)](https://ci.appveyor.com/project/ShiWei-L/sharpplugs)
 [![NuGet](https://img.shields.io/nuget/v/SharpPlug.Core.svg)](https://www.nuget.org/packages/SharpPlug.Core/)
 [![NuGet](https://img.shields.io/nuget/dt/SharpPlug.Core.svg)](https://www.nuget.org/packages/SharpPlug.Core/)
 
-## Current Features
+## 当前功能
 
 - DI
 - AutoMapper
@@ -19,28 +18,26 @@
 - WebAPiRoute
 - EntityFramework Repoistory
 
-## Get Started
+## 快速开始
 
-First of all need to have a core project at asp.net Core, Here I've created a asp.net core MVC project
+首先我们需要一个Asp.net Core的项目，在这里我提前创建了一个Asp.net Core MVC项目
 
 ![asp.net core Project](/doc/img/getStarted/createProject.png)
 
-Now, install SharpPlugs Core packages
+现在安装 SharpPlug.core Nuget包
 ```powershell
 dotnet add package SharpPlug.Core
 ```
-
-AddSharpPlugCore during Startup
+在Startup添加AddSharpPlugCore
 ```c#
  services.AddSharpPlugCore(opt=>{
       opt.DiAssembly.Add(Assembly.GetExecutingAssembly());
  });
 ```
 ![asp.net core Project](/doc/img/getStarted/2.png)
+现在我们已经有了自动依赖注入的功能,我创建了TestService类与ITestService接口
 
-Now we have the function of the dependency injection, I create a TestService classes with TestService interface
-
-*Automatic dependency injection is a naming rules, ends in Service or  Repository is automatically injected by default*
+*自动依赖注入是有命名约定的, 以Service或Repository结尾的将被自动注入*
 
 ```c#
 public class TestSevice : ITestService,IScopedDependency
@@ -57,7 +54,7 @@ public  interface ITestService
     string Hello();
 }
 ```
-In the injected ITestService HomeController
+在HomeController注入ITestService
 ```c#
 public class HomeController : Controller
 {
@@ -78,12 +75,12 @@ public class HomeController : Controller
        
 }
 ```
-Now press F5 to debug，In your browser's address bar input /home/Hello，The request will be stay in the breakpoint
+按F5进行调试，在浏览器地址栏输入/Home/Index，请求会停留在断点的位置
 
 ![asp.net core Project](/doc/img/getStarted/3.png)
 
-Now we press F5 to let it continue to run , We will see the Hello World output
+按F5继续运行, 会看到浏览器输出 Hello World
 
 ![asp.net core Project](/doc/img/getStarted/4.png)
 
-Want to know more usage?Please see the advanced document
+想要了解更多的使用方法? 请查看高级文档部分
