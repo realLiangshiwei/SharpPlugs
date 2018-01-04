@@ -40,18 +40,13 @@ dotnet add package SharpPlug.Core
 *自动依赖注入是有命名约定的, 以Service或Repository结尾的将被自动注入*
 
 ```c#
-public class TestSevice : ITestService,IScopedDependency
+public class TestService : ITestService,IScopedDependency
 {
 
-    string ITestService.Hello()
+    public string Hello()
     {
          return "Hello World";
     }
-}
-
-public  interface ITestService
-{
-    string Hello();
 }
 ```
 在HomeController注入ITestService
