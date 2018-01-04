@@ -43,18 +43,13 @@ Now we have the function of the dependency injection, I create a TestService cla
 *Automatic dependency injection is a naming rules, ends in Service or  Repository is automatically injected by default*
 
 ```c#
-public class TestSevice : ITestService,IScopedDependency
+public class TestService : ITestService,IScopedDependency
 {
 
-    string ITestService.Hello()
+    public string Hello()
     {
          return "Hello World";
     }
-}
-
-public  interface ITestService
-{
-    string Hello();
 }
 ```
 In the injected ITestService HomeController
