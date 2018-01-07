@@ -2,5 +2,98 @@
 
 Dependency injection in the back-end is already a mainstream way of development, Asp.net core built-in IOC container, we can add rely on like this
 ```c#
+services.AddTransient<ITestService,TestService>();
+```
+But this shows add rely on, has the following disadvantages
+- Easily forgotten
+- Dependence when rely on too much, add code will be very large
+- Repeat boring work
+
+SharpPlugs can help developers to maintain dependencies,SharpPlugs use naming conventions, these at application startup suitable classes will be added.
+
+The default naming *Naming conventions can be custom*
+- Service
+- Repository
+
+SharpPlugs provides the following interface
+- IScopedDependency      The only instance scope (the same request)
+- ISingletonDependency   The singleton
+- ITrasientDependency    Every time a new instance
+
+The following will through a simple example to illustrate Create a asp.net core MVC project
+Now, install SharpPlugs Core packages
+```powershell
+dotnet add package SharpPlug.Core
+```
+AddSharpPlugCore during Startup 
+
+ClassSuffix is a collection, used to add custom naming convention
+```c#
+ services.AddSharpPlugCore(opt=>{
+      opt.DiAssembly.Add(Assembly.GetExecutingAssembly());
+      opt.ClassSuffix.Add("MySuffix");
+ });
+```
+Create a class with ScopedService IScopedService interface, Life cycle is IScopedDependency
+```c#
+public class ScopedService : IScopedService,IScopedDependency
+{
+    public Guid Str {get; set;}
+
+    public ScopedService()
+    {
+        Str = Guid.NewGuid();
+    }
+    public string Hello()
+    {
+        return Str.ToString();
+    }
+}
+
+public  interface IScopedService
+{
+    string Hello();
+}
+```
+Create a class with SingletonMySuffix ISingletonMySuffix interface, Life cycle is ISingletonDependency
+```c#
+public class SingletonMySuffix : ISingletonMySuffix,ISingletonDependency
+{
+    public Guid Str {get; set;}
+
+    public SingletonMySuffix()
+    {
+        Str = Guid.NewGuid();
+    }
+    public string Hello()
+    {
+        return Str.ToString();
+    }
+}
+
+public interface ISingletonMySuffix
+{
+    string Hello();
+}
+```
+Create Class TrasientService It does not implement other interfaces,Life cycle is ITrasientDependency
+```c#
+public class SingletonMySuffix : ITrasientDependency
+{
+    public Guid Str {get; set;}
+
+    public SingletonMySuffix()
+    {
+        Str = Guid.NewGuid();
+    }
+    public string Hello()
+    {
+        return Str.ToString();
+    }
+}
 
 ```
+
+Respectively added DI above three kinds of usage, the first is based on the default naming convention, the second custom naming convention, the third did not implement other interfaces
+
+Now we are injected into the HomeController
