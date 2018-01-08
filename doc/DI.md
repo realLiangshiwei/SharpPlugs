@@ -11,7 +11,7 @@ But this shows add rely on, has the following disadvantages
 
 SharpPlugs can help developers to maintain dependencies,SharpPlugs use naming conventions, these at application startup suitable classes will be added.
 
-The default naming *Naming conventions can be custom*
+The default naming *Naming conventions can be custom
 - Service
 - Repository
 
@@ -128,3 +128,6 @@ public IActionResult Hello()
 ```
 
 Now run the project
+
+![asp.net core Project](/doc/img/DI/1.png)
+We can see scopeService and scopeService are the same instance,SingleonMySuffix use custom suffix, it is a singleton,TrasientService demonstrated directly into classes instead of interfaces, Instance of it is different every time
