@@ -87,3 +87,14 @@ Now we press F5 to let it continue to run , We will see the Hello World output
 ![asp.net core Project](/doc/img/getStarted/4.png)
 
 Want to know more usage?Please see the [advanced document](/doc/document.md) 
+
+## Nuget Packages
+
+SharpPlugs is distributed as nuget packages.
+|Package|Status|
+|:------|:-----:|
+|SharpPlug.Core|[![NuGet version](https://badge.fury.io/nu/SharpPlug.Core.svg)](https://badge.fury.io/nu/SharpPlug.Core)|
+|SharpPlug.ElasticSearch|[![NuGet version](https://badge.fury.io/nu/SharpPlug.ElasticSearch.svg)](https://badge.fury.io/nu/Abp.AspNetCore)|
+|SharpPlug.AutoMapper|[![NuGet version](https://badge.fury.io/nu/SharpPlug.AutoMapper.svg)](https://badge.fury.io/nu/SharpPlug.AutoMapper)|
+|SharpPlug.WebApi|[![NuGet version](https://badge.fury.io/nu/SharpPlug.WebApi.svg)](https://badge.fury.io/nu/SharpPlug.WebApi)|
+|SharpPlug.EntityFrameworkCore|[![NuGet version](https://badge.fury.io/nu/SharpPlug.EntityFrameworkCore.svg)](https://badge.fury.io/nu/SharpPlug.EntityFrameworkCore)|

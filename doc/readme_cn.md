@@ -79,3 +79,14 @@ public class HomeController : Controller
 ![asp.net core Project](/doc/img/getStarted/4.png)
 
 想要了解更多的使用方法? 请查看[高级文档](/doc/document_cn.md)部分
+
+## Nuget Packages
+
+SharpPlugs is distributed as nuget packages.
+|Package|Status|
+|:------|:-----:|
+|SharpPlug.Core|[![NuGet version](https://badge.fury.io/nu/SharpPlug.Core.svg)](https://badge.fury.io/nu/SharpPlug.Core)|
+|SharpPlug.ElasticSearch|[![NuGet version](https://badge.fury.io/nu/SharpPlug.ElasticSearch.svg)](https://badge.fury.io/nu/Abp.AspNetCore)|
+|SharpPlug.AutoMapper|[![NuGet version](https://badge.fury.io/nu/SharpPlug.AutoMapper.svg)](https://badge.fury.io/nu/SharpPlug.AutoMapper)|
+|SharpPlug.WebApi|[![NuGet version](https://badge.fury.io/nu/SharpPlug.WebApi.svg)](https://badge.fury.io/nu/SharpPlug.WebApi)|
+|SharpPlug.EntityFrameworkCore|[![NuGet version](https://badge.fury.io/nu/SharpPlug.EntityFrameworkCore.svg)](https://badge.fury.io/nu/SharpPlug.EntityFrameworkCore)|
