@@ -128,7 +128,7 @@ public IActionResult Hello()
 
 ```
 
-Now run the project
+现在运行项目
 
 ![asp.net core Project](/doc/img/DI/1.png)
 我们可以看到scopeService scopeService相同的实例,SingleonMySuffix使用的是自定义的后缀它的实例是单例的,TrasientService演示了直接注入类而它每次都是不同的实例
