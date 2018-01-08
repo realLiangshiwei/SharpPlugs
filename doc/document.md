@@ -9,7 +9,7 @@ SharpPlugs is divided into each small package, each package usually has a relate
 
 ## SharpPlugs Documents
 
-#### DI  (unfinished)
+#### [DI](/doc/DI.md) 
 
 #### AutoMapper (unfinished)
 

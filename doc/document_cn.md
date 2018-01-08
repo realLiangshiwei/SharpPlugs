@@ -7,7 +7,7 @@ SharpPlugs 被分为每小的包，每个包通常具有一个相关的功能。
 
 ## SharpPlugs 文档
 
-#### DI  (未完成)
+#### [DI](/doc/DI.md) 
 
 #### AutoMapper (未完成)
 

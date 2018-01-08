@@ -97,3 +97,34 @@ public class SingletonMySuffix : ITrasientDependency
 Respectively added DI above three kinds of usage, the first is based on the default naming convention, the second custom naming convention, the third did not implement other interfaces
 
 Now we are injected into the HomeController
+```c#
+private readonly IScopedService _scopedService;
+private readonly IScopedService _scopedService2;
+
+private readonly ISingletonMySuffix _singletonMySufix;
+
+private readonly TrasientService _trasientService;
+private readonly TrasientService _trasientService2;
+
+public  HomeController(IScopedService scopedService,IScopedService scopedService2,ISingletonMySuffix singletonMySuffix,TrasientService trasientService,TrasientService trasientService2)
+{
+    _scopedService = scopedService;
+    _scopedService2 = scopedService2;
+    _singletonMySufix = singletonMySuffix;
+    _trasientService= trasientService;
+    _trasientService2 = trasientService2;
+}
+
+public IActionResult Hello()
+{
+    ViewBag.scopeService = _scopedService.Hello();
+    ViewBag.scopeService2 = _scopedService2.Hello();
+    ViewBag.singleonMySuffix = _singletonMySufix.Hello();
+    ViewBag.trasientService = _trasientService.Hello();
+    ViewBag.trasientService2 = _trasientService2.Hello();
+    return View();
+}
+
+```
+
+Now run the project
