@@ -12,7 +12,7 @@
 
 ## 当前功能
 
-- DI
+- [DI](/doc/DI_cn.md) 
 - AutoMapper
 - ElasticSearch
 - WebAPiRoute
