@@ -24,7 +24,7 @@ namespace SharpPlug.WebApiTest
 
 
 
-    public class TestDi2 : ITrasientDependency
+    public class TestDi2Service : ITrasientDependency
     {
         public IEnumerable<string> Test()
         {

@@ -54,22 +54,30 @@ namespace SharpPlug.Core.DI
             foreach (var type in types)
             {
                 var @interface = allType.FirstOrDefault(o => o.Name == "I" + type.Name && o.IsInterface);
-                if (@interface != null)
-                {
-                    if (typeof(ITrasientDependency).IsAssignableFrom(type))
-                    {
-                        sercice.AddTransient(@interface, type);
-                    }
-                    else if (typeof(IScopedDependency).IsAssignableFrom(type))
-                    {
+                bool interfaceExist = @interface != null;
 
-                        sercice.AddScoped(@interface, type);
-                    }
-                    else if (typeof(ISingletonDependency).IsAssignableFrom(type))
-                    {
-                        sercice.AddSingleton(@interface, type);
-                    }
+                if (typeof(ITrasientDependency).IsAssignableFrom(type))
+                {
+                    if (interfaceExist)
+                        sercice.AddTransient(@interface, type);
+                    else
+                        sercice.AddTransient(type);
                 }
+                else if (typeof(IScopedDependency).IsAssignableFrom(type))
+                {
+                    if (interfaceExist)
+                        sercice.AddScoped(@interface, type);
+                    else
+                        sercice.AddScoped(type);
+                }
+                else if (typeof(ISingletonDependency).IsAssignableFrom(type))
+                {
+                    if (interfaceExist)
+                        sercice.AddSingleton(@interface, type);
+                    else
+                        sercice.AddSingleton(type);
+                }
+
 
             }
         }

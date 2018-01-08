@@ -12,9 +12,9 @@ namespace SharpPlug.WebApiTest.Controllers
 
         private readonly ITestDiService _testDi;
 
-        private readonly TestDi2 _testDi2;
+        private readonly TestDi2Service _testDi2;
 
-        public ValuesController(ITestDiService testDi, TestDi2 testDi2)
+        public ValuesController(ITestDiService testDi, TestDi2Service testDi2)
         {
             _testDi = testDi;
             _testDi2 = testDi2;
