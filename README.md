@@ -83,7 +83,10 @@ Now we press F5 to let it continue to run , We will see the Hello World output
 
 Want to know more usage?Please see the [advanced document](/doc/document.md) 
 
+## Nuget Packages
+
 SharpPlugs is distributed as nuget packages.
+
 |Package|Status|
 |:------|:-----:|
 |SharpPlug.Core|[![NuGet version](https://badge.fury.io/nu/SharpPlug.Core.svg)](https://badge.fury.io/nu/SharpPlug.Core)|
