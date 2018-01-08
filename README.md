@@ -13,7 +13,7 @@
 
 ## Current Features
 
-- [DI](/doc/DI_cn.md) 
+- [DI](/doc/DI.md) 
 - AutoMapper
 - ElasticSearch
 - WebAPiRoute
