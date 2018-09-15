@@ -77,7 +77,7 @@ namespace SharpPlug.WebApiTest
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi Test V1");
-                c.ShowRequestHeaders();
+                //c.ShowRequestHeaders();
             });
             app.UseMvc();
         }

@@ -243,13 +243,14 @@ namespace SharpPlug.WebApi.Swashbuckle
                 Deprecated = apiDescription.IsObsolete() ? true : (bool?)null
             };
 
-            var filterContext = new OperationFilterContext(apiDescription, schemaRegistry);
-            foreach (var filter in _settings.OperationFilters)
-            {
-                filter.Apply(operation, filterContext);
-            }
+            //var filterContext = new OperationFilterContext(apiDescription, schemaRegistry);
+            //foreach (var filter in _settings.OperationFilters)
+            //{
+            //    filter.Apply(operation, filterContext);
+            //}
 
-            return operation;
+            //return operation;
+            return null;
         }
 
         private IParameter CreateParameter(
@@ -278,7 +279,7 @@ namespace SharpPlug.WebApi.Swashbuckle
             {
                 Name = name,
                 In = location,
-                Required = (location == "path") || paramDescription.IsRequired()
+                //Required = (location == "path") || paramDescription.()
             };
 
             if (schema == null)
