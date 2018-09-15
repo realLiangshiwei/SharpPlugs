@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>LiangShiWei</Authors>
+    <Company>LiangShiWei</Company>
+    <Description>.Net Core Sharp AutoMapper Plug</Description>
+    <RepositoryUrl>https://github.com/ShiWei-L/SharpPlugs</RepositoryUrl>
+    <RepositoryType></RepositoryType>
+    <PackageLicenseUrl>https://github.com/ShiWei-L/SharpPlugs/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ShiWei-L/SharpPlugs</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/ShiWei-L/SharpPlugs/master/SharpPlug.Core/logo.png</PackageIconUrl>
+    <Product>SharpPlug</Product>
+    <Version>1.2.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspectCore.Extensions.Reflection" Version="1.0.1" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharpPlug.Core\SharpPlug.Core.csproj" />
+  </ItemGroup>
+
+</Project>
