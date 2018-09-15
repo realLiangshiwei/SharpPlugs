@@ -43,9 +43,9 @@ namespace SharpPlug.WebApi.Swashbuckle
             SchemaFilterDescriptors = new List<FilterDescriptor<ISchemaFilter>>();
 
             // Enable Annotations
-            OperationFilter<SwaggerAttributesOperationFilter>();
-            OperationFilter<SwaggerResponseAttributeFilter>();
-            SchemaFilter<SwaggerAttributesSchemaFilter>();
+            //OperationFilter<SwaggerAttributesOperationFilter>();
+            //OperationFilter<SwaggerResponseAttributeFilter>();
+            //SchemaFilter<SwaggerAttributesSchemaFilter>();
         }
 
         /// <summary>

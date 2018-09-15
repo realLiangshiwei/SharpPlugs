@@ -274,14 +274,14 @@ namespace SharpPlug.ElasticSearch
             }
 
             //删除旧索引
-            var alReuslt = await EsClient.AliasAsync(al => al.Remove(rem => rem.Index(oldName).Alias(indexName)).Add(add => add.Index(newIndex).Alias(indexName)));
+            var alReuslt = await EsClient.AliasAsync(al => al.Remove(rem => rem.Index(oldName.Name).Alias(indexName)).Add(add => add.Index(newIndex).Alias(indexName)));
 
             if (!alReuslt.Acknowledged)
             {
                 throw new Exception($"reBuild set Alias {indexName}  failed :{alReuslt.ServerError.Error.Reason}");
             }
-            var delResult = await EsClient.DeleteIndexAsync(oldName);
-            throw new Exception($"reBuild delete old Index {oldName} failed :" + delResult.ServerError.Error.Reason);
+            var delResult = await EsClient.DeleteIndexAsync(oldName.Name);
+            throw new Exception($"reBuild delete old Index {oldName.Name} failed :" + delResult.ServerError.Error.Reason);
         }
 
         /// <summary>

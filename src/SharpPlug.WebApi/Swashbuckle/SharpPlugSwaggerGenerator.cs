@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
-using AspectCore.Extensions.Reflection;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Options;
 using SharpPlug.WebApi.Configuration;
-using SharpPlug.WebApi.Router;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -22,12 +16,13 @@ namespace SharpPlug.WebApi.Swashbuckle
         private readonly IApiDescriptionGroupCollectionProvider _apiDescriptionsProvider;
         private readonly ISchemaRegistryFactory _schemaRegistryFactory;
         private readonly SwaggerGeneratorSettings _settings;
-        private readonly IOptions<SharpPlugRouterOptions> _options;
-        public SharpPlugSwaggerGenerator(IApiDescriptionGroupCollectionProvider apiDescriptionsProvider, ISchemaRegistryFactory schemaRegistryFactory, SwaggerGeneratorSettings settings, IOptions<SharpPlugRouterOptions> options)
+        private readonly IOptions<SharpPlugRouterOptions> _sharpPlugRouteroptions;
+        //private readonly SwaggerGeneratorOptions _options;
+        public SharpPlugSwaggerGenerator(IApiDescriptionGroupCollectionProvider apiDescriptionsProvider, ISchemaRegistryFactory schemaRegistryFactory, SwaggerGeneratorSettings settings, IOptions<SharpPlugRouterOptions> sharpPlugRouteroptions)
         {
             _apiDescriptionsProvider = apiDescriptionsProvider;
             _schemaRegistryFactory = schemaRegistryFactory;
-            _options = options;
+            _sharpPlugRouteroptions = sharpPlugRouteroptions;
             _settings = settings ?? new SwaggerGeneratorSettings();
         }
 
@@ -39,42 +34,73 @@ namespace SharpPlug.WebApi.Swashbuckle
              string basePath = null,
              string[] schemes = null)
         {
-            var schemaRegistry = _schemaRegistryFactory.Create();
+            //if (!_sharpPlugRouteroptions.SwaggerDocs.TryGetValue(documentName, out Info info))
 
-            if (!_settings.SwaggerDocs.TryGetValue(documentName, out Info info))
-                throw new UnknownSwaggerDocument(documentName);
+            //    throw new UnknownSwaggerDocument(documentName);
 
-            var apiDescriptions = _apiDescriptionsProvider.ApiDescriptionGroups.Items
-                .SelectMany(group => group.Items)
-                .Where(apiDesc => _settings.DocInclusionPredicate(documentName, apiDesc))
-                .Where(apiDesc => !_settings.IgnoreObsoleteActions || !apiDesc.IsObsolete())
-                .OrderBy(_settings.SortKeySelector);
 
-            var paths = apiDescriptions
-                .GroupBy(apiDesc => apiDesc.RelativePathSansQueryString())
-                .ToDictionary(group => "/" + group.Key, group => CreatePathItem(group, schemaRegistry));
 
-            var swaggerDoc = new SwaggerDocument
-            {
-                Info = info,
-                Host = host,
-                BasePath = basePath,
-                Schemes = schemes,
-                Paths = paths,
-                Definitions = schemaRegistry.Definitions,
-                SecurityDefinitions = _settings.SecurityDefinitions
-            };
+            //var applicableApiDescriptions = _apiDescriptionsProvider.ApiDescriptionGroups.Items
 
-            var filterContext = new DocumentFilterContext(
-                _apiDescriptionsProvider.ApiDescriptionGroups,
-                schemaRegistry);
+            //    .SelectMany(group => group.Items)
 
-            foreach (var filter in _settings.DocumentFilters)
-            {
-                filter.Apply(swaggerDoc, filterContext);
-            }
+            //    .Where(apiDesc => _sharpPlugRouteroptions.DocInclusionPredicate(documentName, apiDesc))
 
-            return swaggerDoc;
+            //    .Where(apiDesc => !_sharpPlugRouteroptions.IgnoreObsoleteActions || !apiDesc.IsObsolete());
+
+
+
+            //var schemaRegistry = _schemaRegistryFactory.Create();
+
+
+
+            //var swaggerDoc = new SwaggerDocument
+
+            //{
+
+            //    Info = info,
+
+            //    Host = host,
+
+            //    BasePath = basePath,
+
+            //    Schemes = schemes,
+
+            //    Paths = CreatePathItems(applicableApiDescriptions, schemaRegistry),
+
+            //    Definitions = schemaRegistry.Definitions,
+
+            //    SecurityDefinitions = _sharpPlugRouteroptions.SecurityDefinitions.Any() ? _sharpPlugRouteroptions.SecurityDefinitions : null,
+
+            //    Security = _sharpPlugRouteroptions.SecurityRequirements.Any() ? _sharpPlugRouteroptions.SecurityRequirements : null
+
+            //};
+
+
+
+
+            //var filterContext = new DocumentFilterContext(
+
+            //    _apiDescriptionsProvider.ApiDescriptionGroups,
+
+            //    applicableApiDescriptions,
+
+            //    schemaRegistry);
+
+
+
+            //foreach (var filter in _sharpPlugRouteroptions.DocumentFilters)
+
+            //{
+
+            //    filter.Apply(swaggerDoc, filterContext);
+
+            //}
+
+
+
+            //return swaggerDoc;
+            return null;
         }
 
         public virtual IEnumerable<ApiDescription> ReGenerateApiDes(
@@ -88,10 +114,10 @@ namespace SharpPlug.WebApi.Swashbuckle
                 else
                 {
                     if (apiDescription.ActionDescriptor.GetType().GetProperty("ActionName")
-                        .GetValue(apiDescription.ActionDescriptor) is string actionName)
+                        ?.GetValue(apiDescription.ActionDescriptor) is string actionName)
                     {
                         string httpMethod;
-                        foreach (var custom in _options.Value.CustomRule)
+                        foreach (var custom in _sharpPlugRouteroptions.Value.CustomRule)
                         {
                             if (actionName.StartsWith(custom.Key))
                             {
@@ -152,18 +178,14 @@ namespace SharpPlug.WebApi.Swashbuckle
                 var httpMethod = group.Key;
 
                 if (httpMethod == null)
-                    throw new NotSupportedException(string.Format(
-                        "Ambiguous HTTP method for action - {0}. " +
-                        "Actions require an explicit HttpMethod binding for Swagger",
-                        group.First().ActionDescriptor.DisplayName));
+                    throw new NotSupportedException(
+                        $"Ambiguous HTTP method for action - {@group.First().ActionDescriptor.DisplayName}. " +
+                        "Actions require an explicit HttpMethod binding for Swagger");
 
                 if (group.Count() > 1)
-                    throw new NotSupportedException(string.Format(
-                        "HTTP method \"{0}\" & path \"{1}\" overloaded by actions - {2}. " +
-                        "Actions require unique method/path combination for Swagger",
-                        httpMethod,
-                        group.First().RelativePathSansQueryString(),
-                        string.Join(",", group.Select(apiDesc => apiDesc.ActionDescriptor.DisplayName))));
+                    throw new NotSupportedException(
+                        $"HTTP method \"{httpMethod}\" & path \"{@group.First().RelativePathSansQueryString()}\" overloaded by actions - {string.Join(",", @group.Select(apiDesc => apiDesc.ActionDescriptor.DisplayName))}. " +
+                        "Actions require unique method/path combination for Swagger");
 
                 var apiDescription = group.Single();
 
@@ -221,13 +243,14 @@ namespace SharpPlug.WebApi.Swashbuckle
                 Deprecated = apiDescription.IsObsolete() ? true : (bool?)null
             };
 
-            var filterContext = new OperationFilterContext(apiDescription, schemaRegistry);
-            foreach (var filter in _settings.OperationFilters)
-            {
-                filter.Apply(operation, filterContext);
-            }
+            //var filterContext = new OperationFilterContext(apiDescription, schemaRegistry);
+            //foreach (var filter in _settings.OperationFilters)
+            //{
+            //    filter.Apply(operation, filterContext);
+            //}
 
-            return operation;
+            //return operation;
+            return null;
         }
 
         private IParameter CreateParameter(
@@ -256,7 +279,7 @@ namespace SharpPlug.WebApi.Swashbuckle
             {
                 Name = name,
                 In = location,
-                Required = (location == "path") || paramDescription.IsRequired()
+                //Required = (location == "path") || paramDescription.()
             };
 
             if (schema == null)
