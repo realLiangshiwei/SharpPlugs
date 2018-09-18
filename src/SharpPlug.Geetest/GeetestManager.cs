@@ -114,35 +114,6 @@ namespace SharpPlug.Geetest
             return md5Str1 + md5Str2.Substring(0, 2);
         }
 
-
-        /// <summary>
-        /// 一个简单的验证,这时应该调用服务器的其他认证方式,例如手机验证码
-        /// </summary>
-        /// <param name="challenge">failback模式下用于与validate一起解码答案， 判断验证是否正确</param>
-        /// <param name="validate">failback模式下用于与challenge一起解码答案， 判断验证是否正确</param>
-        /// <param name="seccode">failback模式下，其实是个没用的参数</param>
-        /// <returns>验证结果</returns>
-        public bool FailbackValidate(string challenge, string validate, string seccode)
-        {
-            if (!RequestIsLegal(challenge, validate, seccode))
-            {
-                return false;
-            }
-            return md5Encode(challenge) == validate;
-        }
-
-        private bool RequestIsLegal(string challenge, string validate, string seccode)
-        {
-            if (string.IsNullOrWhiteSpace(challenge) || string.IsNullOrWhiteSpace(validate) ||
-                string.IsNullOrWhiteSpace(seccode))
-            {
-                return false;
-            }
-            return true;
-        }
-
-
-
         /// <summary>
         /// 二次验证
         /// </summary>
