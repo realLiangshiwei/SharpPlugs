@@ -1,5 +1,5 @@
 
-<img src="https://raw.githubusercontent.com/ShiWei-L/SharpPlugs/master/SharpPlug.Core/logo.png" width="200" height="200" /> 
+<img src="https://raw.githubusercontent.com/liangshiw/SharpPlugs/master/doc/img/logo.png" width="200" height="200" /> 
 
 # SharpPlugs 
 
@@ -67,9 +67,10 @@ public class HomeController : Controller
     {
         return Json(_testService.Hello())   ;
     }
-       
+
 }
 ```
+
 按F5进行调试，在浏览器地址栏输入/Home/Index，请求会停留在断点的位置
 
 ![asp.net core Project](/doc/img/getStarted/3.png)

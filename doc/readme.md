@@ -1,5 +1,5 @@
 
-<img src="https://raw.githubusercontent.com/ShiWei-L/SharpPlugs/master/SharpPlug.Core/logo.png" width="200" height="200" /> 
+<img src="https://raw.githubusercontent.com/liangshiw/SharpPlugs/master/doc/img/logo.png" width="200" height="200" /> 
 
 # SharpPlugs 
 
