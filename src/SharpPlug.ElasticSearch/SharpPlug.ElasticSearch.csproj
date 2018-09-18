@@ -11,7 +11,7 @@
     <Version>1.2.2</Version>
     <PackageProjectUrl>https://github.com/ShiWei-L/SharpPlugs</PackageProjectUrl>
     <PackageReleaseNotes>.Net Core Sharp ElasticSearch Plug</PackageReleaseNotes>
-    <PackageIconUrl>https://raw.githubusercontent.com/ShiWei-L/SharpPlugs/master/SharpPlug.Core/logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/liangshiw/SharpPlugs/master/doc/img/logo.png</PackageIconUrl>
     <Product>SharpPlug</Product>
   </PropertyGroup>
 

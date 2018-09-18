@@ -8,7 +8,7 @@
     <Description>.Net Core SharpCore Plug</Description>
     <RepositoryUrl>https://github.com/ShiWei-L/SharpPlugs</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/ShiWei-L/SharpPlugs/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/ShiWei-L/SharpPlugs/master/SharpPlug.Core/logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/liangshiw/SharpPlugs/master/doc/img/logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/ShiWei-L/SharpPlugs</PackageProjectUrl>
     <Product>SharpPlug</Product>
     <Version>1.2.2</Version>
