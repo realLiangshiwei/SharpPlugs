@@ -8,7 +8,7 @@
 Provide Repositories and cooperate with dependency injection</Description>
     <PackageLicenseUrl>https://github.com/ShiWei-L/SharpPlugs/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ShiWei-L/SharpPlugs</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/ShiWei-L/SharpPlugs/master/SharpPlug.Core/logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/liangshiw/SharpPlugs/master/doc/img/logo.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/ShiWei-L/SharpPlugs</RepositoryUrl>
     <PackageReleaseNotes>.Net Core Sharp ElasticSearch Plug
 Provide Repositories and cooperate with dependency injection</PackageReleaseNotes>

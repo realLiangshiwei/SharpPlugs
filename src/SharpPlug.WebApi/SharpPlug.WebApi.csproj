@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIconUrl>https://raw.githubusercontent.com/ShiWei-L/SharpPlugs/master/SharpPlug.Core/logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/liangshiw/SharpPlugs/master/doc/img/logo.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/ShiWei-L/SharpPlugs/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ShiWei-L/SharpPlugs</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ShiWei-L/SharpPlugs</RepositoryUrl>

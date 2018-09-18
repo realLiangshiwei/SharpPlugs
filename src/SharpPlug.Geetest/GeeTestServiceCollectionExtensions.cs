@@ -5,11 +5,11 @@ namespace SharpPlug.Geetest
 {
     public static class GeeTestServiceCollectionExtensions
     {
-        public static IServiceCollection AddGeetest(this IServiceCollection services, Action<GeetestOptions> setupAction = null)
+        public static IServiceCollection AddGeetest(this IServiceCollection services, Action<GeetestOptions> setupAction)
         {
             services.AddHttpClient();
             services.Configure(setupAction);
-            services.AddSingleton<Geetest>();
+            services.AddSingleton<GeetestManager>();
            
             return services;
         }

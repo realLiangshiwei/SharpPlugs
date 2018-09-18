@@ -6,7 +6,7 @@ namespace SharpPlug.Geetest
 {
     public class GeetestOptions
     {
-        public string AppId { get; set; }
+        public string Id { get; set; }
 
         public string Key { get; set; }
     }
