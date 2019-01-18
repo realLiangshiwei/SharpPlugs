@@ -6,6 +6,9 @@
 .Net Core 鋒利扩展   
 [中文文档](/doc/readme_cn.md)
 
+Status
+
+**This project is in very early preview stage and it's not suggested to use it in a real project**.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/74whrxjajlnacjma?svg=true)](https://ci.appveyor.com/project/ShiWei-L/sharpplugs)
 [![NuGet](https://img.shields.io/nuget/v/SharpPlug.Core.svg)](https://www.nuget.org/packages/SharpPlug.Core/)
