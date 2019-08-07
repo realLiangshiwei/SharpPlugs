@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "site", "site", "{B4C06752-E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpPlug.Geetest", "src\SharpPlug.Geetest\SharpPlug.Geetest.csproj", "{CE3AB467-FCA0-4BCF-9D04-DFC238DEF742}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpPlug.Getest.Mvc", "SharpPlugGetest.Mvc\SharpPlug.Getest.Mvc.csproj", "{4554D5CE-F4B9-4DEB-AB75-65EC9774E62C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpPlug.Getest.Mvc", "test\SharpPlugGetest.Mvc\SharpPlug.Getest.Mvc.csproj", "{4554D5CE-F4B9-4DEB-AB75-65EC9774E62C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
