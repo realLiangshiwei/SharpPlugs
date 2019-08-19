@@ -1,0 +1,32 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<BlogEsModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>博文列表</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>作者</th>
+        <th>标题</th>
+        <th>内容</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var blog in Model)
+    {
+        <tr>
+            <td>@blog.Id</td>
+            <td>@blog.Author</td>
+            <td>@blog.Title</td>
+            <td>@blog.Content</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

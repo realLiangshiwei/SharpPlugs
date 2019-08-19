@@ -8,7 +8,7 @@
     <Description>.Net Core Sharp ElasticSearch Plug</Description>
     <RepositoryUrl>https://github.com/ShiWei-L/SharpPlugs</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/ShiWei-L/SharpPlugs/blob/master/LICENSE</PackageLicenseUrl>
-    <Version>1.2.2</Version>
+    <Version>1.2.3</Version>
     <PackageProjectUrl>https://github.com/ShiWei-L/SharpPlugs</PackageProjectUrl>
     <PackageReleaseNotes>.Net Core Sharp ElasticSearch Plug</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/liangshiw/SharpPlugs/master/doc/img/logo.png</PackageIconUrl>
@@ -22,7 +22,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
-    <PackageReference Include="NEST" Version="6.3.0" />
+    <PackageReference Include="NEST" Version="7.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 

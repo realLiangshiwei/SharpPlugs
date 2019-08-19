@@ -35,6 +35,7 @@ namespace SharpPlug.ElasticSearch
             var nodes = strs.Select(s => new Uri(s)).ToList();
             var connectionPool = new SniffingConnectionPool(nodes);
             var connectionString = new ConnectionSettings(connectionPool);
+           
             connectionString.BasicAuthentication(_options.Value.AuthUserName, _options.Value.AuthPassWord);
 
             return new ElasticClient(connectionString);
@@ -46,23 +47,24 @@ namespace SharpPlug.ElasticSearch
         /// </summary>
         /// <param name="indexName"></param>
         /// <param name="shard"></param>
-        /// <param name="eplica"></param>
+        /// <param name="numberOfReplicas"></param>
         /// <returns></returns>
-        public virtual async Task CrateIndexAsync(string indexName, int shard = 1, int eplica = 1)
+        public virtual async Task CrateIndexAsync(string indexName, int shard = 1, int numberOfReplicas = 1)
         {
-            var exis = await EsClient.IndexExistsAsync(indexName);
-            if (exis.Exists)
+            var exits = await EsClient.Indices.AliasExistsAsync(indexName);
+
+            if (exits.Exists)
                 return;
             var newName = indexName + DateTime.Now.Ticks;
             var result = await EsClient
-                .CreateIndexAsync(newName,
+                .Indices.CreateAsync(newName,
                     ss =>
                         ss.Index(newName)
                             .Settings(
-                                o => o.NumberOfShards(shard).NumberOfReplicas(eplica).Setting("max_result_window", int.MaxValue)));
+                                o => o.NumberOfShards(shard).NumberOfReplicas(numberOfReplicas).Setting("max_result_window", int.MaxValue)));
             if (result.Acknowledged)
             {
-                await EsClient.AliasAsync(al => al.Add(add => add.Index(newName).Alias(indexName)));
+                await EsClient.Indices.PutAliasAsync(newName, indexName);
                 return;
             }
             throw new ElasticSearchException($"Create Index {indexName} failed :" + result.ServerError.Error.Reason);
@@ -79,21 +81,21 @@ namespace SharpPlug.ElasticSearch
         /// <returns></returns>
         public virtual async Task CreateIndexAsync<T>(string indexName, int shard = 1, int eplica = 1) where T : class
         {
-            var exis = await EsClient.IndexExistsAsync(indexName);
+            var exits = await EsClient.Indices.AliasExistsAsync(indexName);
 
-            if (exis.Exists)
+            if (exits.Exists)
                 return;
             var newName = indexName + DateTime.Now.Ticks;
             var result = await EsClient
-                .CreateIndexAsync(newName,
+                .Indices.CreateAsync(newName,
                     ss =>
                         ss.Index(newName)
                             .Settings(
                                 o => o.NumberOfShards(shard).NumberOfReplicas(eplica).Setting("max_result_window", int.MaxValue))
-                            .Mappings(m => m.Map<T>(mm => mm.AutoMap())));
+                            .Map(m => m.AutoMap<T>()));
             if (result.Acknowledged)
             {
-                await EsClient.AliasAsync(al => al.Add(add => add.Index(newName).Alias(indexName)));
+                await EsClient.Indices.PutAliasAsync(newName, indexName);
                 return;
             }
             throw new ElasticSearchException($"Create Index {indexName} failed : :" + result.ServerError.Error.Reason);
@@ -216,12 +218,11 @@ namespace SharpPlug.ElasticSearch
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="indexName"></param>
-        /// <param name="typeName"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public virtual async Task DeleteAsync<T>(string indexName, string typeName, T model) where T : class
+        public virtual async Task DeleteAsync<T>(string indexName, T model) where T : class
         {
-            var response = await EsClient.DeleteAsync(new DeleteRequest(indexName, typeName, new Id(model)));
+            var response = await EsClient.DeleteAsync(new DeleteRequest(indexName, new Id(model)));
             if (response.ServerError == null) return;
             throw new Exception($"Delete Docuemnt at index {indexName} :{response.ServerError.Error.Reason}");
 
@@ -234,7 +235,7 @@ namespace SharpPlug.ElasticSearch
         /// <returns></returns>
         public virtual async Task DeleteIndexAsync(string indexName)
         {
-            var response = await EsClient.DeleteIndexAsync(indexName);
+            var response = await EsClient.Indices.DeleteAsync(indexName);
             if (response.Acknowledged) return;
             throw new Exception($"Delete index {indexName} failed :{response.ServerError.Error.Reason}");
         }
@@ -252,14 +253,14 @@ namespace SharpPlug.ElasticSearch
         /// <returns></returns>
         public virtual async Task ReBuild<T>(string indexName) where T : class
         {
-            var result = await EsClient.GetAliasAsync(q => q.Index(indexName));
+            var result = await EsClient.Indices.GetAliasAsync(indexName);
             var oldName = result.Indices.Keys.First();
             //创建新的索引
             var newIndex = indexName + DateTime.Now.Ticks;
-            var createResult = await EsClient.CreateIndexAsync(newIndex,
+            var createResult = await EsClient.Indices.CreateAsync(newIndex,
                 c =>
                     c.Index(newIndex)
-                        .Mappings(ms => ms.Map<T>(m => m.AutoMap())));
+                        .Map(m => m.AutoMap<T>()));
             if (!createResult.Acknowledged)
             {
                 throw new Exception($"reBuild create newIndex {indexName} failed :{result.ServerError.Error.Reason}");
@@ -274,14 +275,17 @@ namespace SharpPlug.ElasticSearch
             }
 
             //删除旧索引
-            var alReuslt = await EsClient.AliasAsync(al => al.Remove(rem => rem.Index(oldName.Name).Alias(indexName)).Add(add => add.Index(newIndex).Alias(indexName)));
+            var deleteResult = await EsClient.Indices.DeleteAsync(oldName);
+            var reAliasResult = await EsClient.Indices.PutAliasAsync(newIndex, indexName);
 
-            if (!alReuslt.Acknowledged)
+            if (!deleteResult.Acknowledged)
             {
-                throw new Exception($"reBuild set Alias {indexName}  failed :{alReuslt.ServerError.Error.Reason}");
+                throw new Exception($"reBuild delete old Index {oldName.Name}   failed :{deleteResult.ServerError.Error.Reason}");
             }
-            var delResult = await EsClient.DeleteIndexAsync(oldName.Name);
-            throw new Exception($"reBuild delete old Index {oldName.Name} failed :" + delResult.ServerError.Error.Reason);
+            if (!reAliasResult.IsValid)
+            {
+                throw new Exception($"reBuild set Alias {indexName}  failed :{reAliasResult.ServerError.Error.Reason}");
+            }
         }
 
         /// <summary>
