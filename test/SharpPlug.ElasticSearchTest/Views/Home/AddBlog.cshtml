@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Add Blog";
+}
+
+<h2>添加博文</h2>
+
+<form class="form-horizontal" asp-controller="Home" asp-action="AddBlog" role="form">
+    <div class="form-group">
+        <label for="id" class="col-sm-2 control-label">Id</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="number" name="id" id="id" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="author" class="col-sm-2 control-label">作者</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" id="author" name="author" placeholder="作者" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">标题</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="title" id="title" placeholder="标题" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastname" class="col-sm-2 control-label">内容</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="content" placeholder="内容" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">提交</button>
+        </div>
+    </div>
+</form>

@@ -14,9 +14,9 @@ namespace SharpPlug.ElasticSearch
         /// </summary>
         /// <param name="indexName"></param>
         /// <param name="shard"></param>
-        /// <param name="eplica"></param>
+        /// <param name="numberOfReplicas"></param>
         /// <returns></returns>
-        Task CrateIndexAsync(string indexName,int shard = 1, int eplica = 1);
+        Task CrateIndexAsync(string indexName, int shard = 1, int numberOfReplicas = 1);
 
         /// <summary>
         /// CreateEsIndex auto Mapping T Property
@@ -25,9 +25,9 @@ namespace SharpPlug.ElasticSearch
         /// <typeparam name="T"></typeparam>
         /// <param name="indexName"></param>
         /// <param name="shard"></param>
-        /// <param name="eplica"></param>
+        /// <param name="numberOfReplicas"></param>
         /// <returns></returns>
-        Task CreateIndexAsync<T>(string indexName, int shard = 1, int eplica = 1) where T : class;
+        Task CreateIndexAsync<T>(string indexName, int shard = 1, int numberOfReplicas = 1) where T : class;
 
         /// <summary>
         /// ReIndex
@@ -73,10 +73,9 @@ namespace SharpPlug.ElasticSearch
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="indexName"></param>
-        /// <param name="typeName"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task DeleteAsync<T>(string indexName, string typeName, T model) where T : class;
+        Task DeleteAsync<T>(string indexName, T model) where T : class;
 
         /// <summary>
         /// Delete Index
